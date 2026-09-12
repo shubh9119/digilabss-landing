@@ -1,0 +1,268 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   GLOBAL STYLES — Apple White/Grey Premium
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #ffffff;
+  color: #1d1d1f;
+  overflow-x: hidden;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(0, 113, 227, 0.15);
+  color: #1d1d1f;
+}
+
+/* Scrollbar — subtle light */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f5f7;
+}
+::-webkit-scrollbar-thumb {
+  background: #d2d2d7;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a6;
+}
+
+/* ============================================
+   SCROLL PROGRESS BAR
+   ============================================ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0071e3, #6366f1, #a855f7);
+  z-index: 9999;
+  transform-origin: left;
+}
+
+/* ============================================
+   HERO BACKGROUND — Subtle floating shapes
+   ============================================ */
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+.shape-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.08) 0%, transparent 70%);
+  top: -150px;
+  right: -100px;
+  animation: shape-float-1 20s ease-in-out infinite;
+}
+
+.shape-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+  bottom: -100px;
+  left: -80px;
+  animation: shape-float-2 25s ease-in-out infinite;
+}
+
+.shape-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  animation: shape-float-3 18s ease-in-out infinite;
+}
+
+@keyframes shape-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-60px, 40px) scale(1.15); }
+  66% { transform: translate(30px, 80px) scale(0.9); }
+}
+
+@keyframes shape-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(50px, -40px) scale(1.1); }
+  66% { transform: translate(-30px, -70px) scale(0.95); }
+}
+
+@keyframes shape-float-3 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  33% { transform: translate(-40%, -60%) scale(1.2); }
+  66% { transform: translate(-60%, -40%) scale(0.85); }
+}
+
+/* ============================================
+   SECTION BACKGROUNDS
+   ============================================ */
+.bg-section-alt {
+  background-color: #f5f5f7;
+}
+
+/* ============================================
+   SECTION DIVIDER — Light
+   ============================================ */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #d2d2d7 50%,
+    transparent 100%
+  );
+}
+
+/* ============================================
+   CARD SYSTEM — White cards with depth
+   ============================================ */
+@layer components {
+  .premium-card {
+    @apply bg-white rounded-3xl border border-gray-100 shadow-sm;
+    transition: all 0.5s cubic-bezier(0.25, 0.4, 0.25, 1);
+  }
+
+  .premium-card:hover {
+    @apply shadow-xl border-gray-200;
+    transform: translateY(-4px);
+  }
+
+  .glass-nav {
+    @apply bg-white/80 backdrop-blur-2xl border-b border-gray-200/60;
+  }
+}
+
+/* ============================================
+   INTERACTIVE CARD GLOW (mouse-tracking)
+   ============================================ */
+.card-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.08), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.card-glow:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   ANIMATED GRADIENT BORDER
+   ============================================ */
+.gradient-border {
+  position: relative;
+  isolation: isolate;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, #0071e3, #6366f1, #a855f7, #0071e3);
+  background-size: 300% 300%;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient-spin 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+@keyframes gradient-spin {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ============================================
+   MARQUEE
+   ============================================ */
+.marquee-track {
+  display: flex;
+  animation: marquee-scroll 35s linear infinite;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================
+   FOCUS STYLES — Blue accent
+   ============================================ */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #0071e3 !important;
+  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+}
+
+/* ============================================
+   SHINE EFFECT — for buttons
+   ============================================ */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.btn-shine:hover::after {
+  left: 100%;
+}
